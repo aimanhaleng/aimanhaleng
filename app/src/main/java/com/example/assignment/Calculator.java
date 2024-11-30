@@ -44,45 +44,59 @@ public class Calculator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 double value, discount,result,rebate;
-                double rate1 = 0.0,rate2 = 0.0,rate3 = 0.0,total;
+                double rate1 = 0.0,rate2 = 0.0,rate3 = 0.0,rate4 = 0.0,total;
 
 
                 try {
                     value = Double.parseDouble(etValue1.getText().toString());
                     discount = Double.parseDouble(etValue2.getText().toString());
-                   if(value <= 100){
-                       rate1 = value * 1.20;
+                   if(value <= 200){
+                       rate1 = value * 0.218;
 
                        total = rate1;
 
-                       tvOutput2.setText("first block rate (1.20/kWh) RM " + rate1);
+                       tvOutput2.setText("");
                        tvOutput3.setText("");
                        tvOutput4.setText("");
                    }
                    else if(value <= 300){
-                       rate1 = 100 * 1.20;
-                       rate2 = (value - 100) * 1.50;
+                       rate1 = 200 * 0.218;
+                       rate2 = (value - 200) * 0.334;
 
                        total = rate1 + rate2;
 
-                       tvOutput2.setText("first block rate (1.20/kWh) RM " + rate1);
-                       tvOutput3.setText("second block rate (1.50/kWh) RM " + rate2);
+                       tvOutput2.setText("") ;
+                       tvOutput3.setText("");
                        tvOutput4.setText("");
                    }
-                   else if(value >= 300){
-                       rate1 = 100 * 1.20;
-                       rate2 = 200 * 1.50;
-                       rate3 = (value - 300) * 2.00;
+                   else if(value <= 600) {
+                       rate1 = 200 * 0.218;
+                       rate2 = 100 * 0.334;
+                       rate3 = (value - 300) * 0.516;
 
-                       total = rate1 + rate2 + rate3;
+                       tvOutput2.setText("") ;
+                       tvOutput3.setText("");
+                       tvOutput4.setText("");
 
-                       tvOutput2.setText("first block rate (1.20/kWh) RM " + rate1);
-                       tvOutput3.setText("Unit Price second block rate (1.50/kWh) RM " + rate2);
-                       tvOutput4.setText("Unit Price third block rate (2.00/kWh) RM " + rate3);
+                   }
+                   else if (value >= 600) {
+                       rate1 = 200 * 0.218;
+                       rate2 = 100 * 0.334;
+                       rate3 = 300 * 0.516;
+                       rate4 = (value - 600) * 0.546;
+
+                       tvOutput2.setText("");
+                       tvOutput3.setText("");
+                       tvOutput4.setText("");
+
+
+                    total = rate1 + rate2 + rate3+rate4;
+
+
 
                    }
 
-                    total = rate1 +rate2 +rate3;
+                    total = rate1 +rate2 +rate3+rate4;
 
                     rebate = (discount/100) * total;
                     result = total - rebate;
@@ -116,11 +130,11 @@ public class Calculator extends AppCompatActivity {
 
                 etValue1.setText("");
                 etValue2.setText("");
-                tvOutput2.setText("First 100kWh for RM1.20/kWh");
-                tvOutput3.setText("Second 200kWh for RM1.50/kWh");
-                tvOutput4.setText("RM2.0/kWh after 300kWh");
+                tvOutput2.setText("First 200kWh for RM0.218/kWh");
+                tvOutput3.setText("Next 100kWh for RM0.334/kWh");
+                tvOutput4.setText("Next 300kWh for RM0.516/kWh");
                 tvOutput9.setText("");
-                tvOutput5.setText("");
+                tvOutput5.setText("After 600kWh, RM0.546/kWh");
                 tvOutput.setText("");
             }
         });
