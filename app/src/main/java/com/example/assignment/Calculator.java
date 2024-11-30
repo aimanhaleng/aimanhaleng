@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Calculator extends AppCompatActivity {
 
-    TextView tvOutput, tvOutput2, tvOutput3, tvOutput4, tvOutput5;
+    TextView tvOutput, tvOutput2, tvOutput3, tvOutput4, tvOutput5, tvOutput9;
 
     EditText etValue1, etValue2;
     Button btnCalculate, btnClear, btnHome;
@@ -37,6 +37,7 @@ public class Calculator extends AppCompatActivity {
         tvOutput4 = findViewById(R.id.tvOutput4);
         tvOutput5 = findViewById(R.id.tvOutput5);
         btnHome = findViewById(R.id.btnHome);
+        tvOutput9 = findViewById(R.id.tvOutput9);
 
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +56,8 @@ public class Calculator extends AppCompatActivity {
                        total = rate1;
 
                        tvOutput2.setText("first block rate (1.20/kWh) RM " + rate1);
+                       tvOutput3.setText("");
+                       tvOutput4.setText("");
                    }
                    else if(value <= 300){
                        rate1 = 100 * 1.20;
@@ -64,6 +67,7 @@ public class Calculator extends AppCompatActivity {
 
                        tvOutput2.setText("first block rate (1.20/kWh) RM " + rate1);
                        tvOutput3.setText("second block rate (1.50/kWh) RM " + rate2);
+                       tvOutput4.setText("");
                    }
                    else if(value >= 300){
                        rate1 = 100 * 1.20;
@@ -81,9 +85,10 @@ public class Calculator extends AppCompatActivity {
                     total = rate1 +rate2 +rate3;
 
                     rebate = (discount/100) * total;
-                    result = total - (total * discount / 100);
+                    result = total - rebate;
 
-                    tvOutput5.setText("Total Rebate RM: " + rebate);
+                    tvOutput5.setText("Current Bill RM:" + total );
+                    tvOutput9.setText("Rebate RM:" + rebate);
                     tvOutput.setText("Final Price RM " + result);
 
 
@@ -109,8 +114,14 @@ public class Calculator extends AppCompatActivity {
             public void onClick(View v) {
                 String Text = btnClear.getText().toString();
 
-                etValue1.setText("Used Unit (kWh)");
-                etValue2.setText("Rebate (%)");
+                etValue1.setText("");
+                etValue2.setText("");
+                tvOutput2.setText("First 100kWh for RM1.20/kWh");
+                tvOutput3.setText("Second 200kWh for RM1.50/kWh");
+                tvOutput4.setText("RM2.0/kWh after 300kWh");
+                tvOutput9.setText("");
+                tvOutput5.setText("");
+                tvOutput.setText("");
             }
         });
 
